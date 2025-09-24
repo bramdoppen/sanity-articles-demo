@@ -2,6 +2,62 @@
 
 This repository showcases **multiple approaches to structuring and displaying content** within Sanity Studio. The primary goal is to demonstrate how a single content model—composed of `articles`, `authors`, and `categories`—can be surfaced through a variety of editorial interfaces to support multilingual content creation and category relationships.
 
+
+## 📸 Screenshots
+
+### All Articles View
+
+![All Articles in Sanity Studio](./public/all-articles.png)
+
+*All articles are listed in the main content pane, showing title, author, language, and featured status.*
+
+---
+
+### Filtered by Author
+
+![Articles Filtered by Author](./public/filtered-articles-by-author.png)
+
+*Articles are filtered to show only those written by a selected author, demonstrating the author filter functionality in the studio.*
+
+### Articles by Author
+
+This view allows editors to quickly filter and browse articles written by a specific author. Selecting an author from the list displays only their associated articles.
+
+**How it works:**
+- The left pane lists all authors.
+- Selecting an author shows a filtered list of articles where the `author` reference matches the selected author.
+- This is implemented in the Studio structure using a nested list:  
+  - First, a list of authors is shown.
+  - When an author is selected, a filtered document list displays only their articles.
+
+**Example Studio Structure Code:**
+```
+// Inside your structure.ts
+...
+S.listItem()
+  .title('Articles by Author')
+  .icon(CiFilter)
+  .child(
+    S.documentTypeList('author')
+      .schemaType('author')
+      .title('Authors')
+      .child((authorId) =>
+        S.documentList()
+          .title('Articles')
+          .filter('_type == "article" && author._ref == $authorId')
+          .params({ authorId })
+      )
+  )
+...
+```
+
+
+
+
+
+
+
+
 ---
 
 ## 🎯 Goals of this repo
