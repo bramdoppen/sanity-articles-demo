@@ -1,0 +1,25 @@
+# Sanity Studio build output
+/dist
+/.next
+/.sanity
+
+# Local env files
+.env
+.env.*.local
+
+# Node modules
+node_modules
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Mac system files
+.DS_Store
+
+# VSCode settings
+.vscode
+
+# Sanity GraphQL API
+graphql.schema.json
